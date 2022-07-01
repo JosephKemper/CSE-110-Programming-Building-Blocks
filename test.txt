@@ -1,0 +1,4 @@
+Accounting,87.7
+programming,97.8
+Youtube,100
+LinkedIn,98
