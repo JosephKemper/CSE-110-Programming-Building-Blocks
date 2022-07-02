@@ -1,8 +1,4 @@
-from re import A
+adding_list_test = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
-
-a=5
-b=7
-c=b=a
-print (b)
-# Testing
+list_average =sum(adding_list_test)/len(adding_list_test)
+print(list_average)

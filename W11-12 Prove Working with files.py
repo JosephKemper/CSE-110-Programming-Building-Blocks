@@ -6,8 +6,14 @@ code_list = []
 year_list = []
 life_expectancy_list = []
 
+# Variables for use in creating country specific data options calulated as part of option 3. 
+total_expectancy = 0
+count = 0
+largest_year = 0
+recent_expectancy = 0
+
 # Open provided life-expectancy.csv file
-with open ("life-expectancy.csv") as country_data:
+with open ("life-expectancy.csv", encoding="utf-8") as country_data:
     for line in country_data:
         # Clean any leading and trailing whitespace
         clean_line = line.strip ()
@@ -16,10 +22,10 @@ with open ("life-expectancy.csv") as country_data:
         data_parts = clean_line.split(",")
 
 
-        country = data_parts [0]
-        code = data_parts [1]
+        country = str(data_parts [0])
+        code = str(data_parts [1])
         year = int(data_parts [2])
-        life_expectancy = data_parts [3]
+        life_expectancy = float(data_parts [3])
 
 # When trying to find the shortest life expetancy, I first ran into a problem where I only got a period. 
 # When trying to troubleshoot the problem, 
@@ -100,7 +106,7 @@ while user_choice != 4:
                 # Print desired data to user
                 if year_list [i] == user_year:
                     print (f"In {user_year}, {country_list[i]} (Code {code_list[i]})" +
-                    f" had an average life expectancy of {life_expectancy_list[i]}.")
+                    f" has an average life expectancy of {life_expectancy_list[i]}.")
         else:
             # Include option for possible gaps in data. 
             print ("We're sorry we don't have data on that year. \nPlease try another year.\n")
@@ -110,17 +116,36 @@ while user_choice != 4:
 
     elif user_choice == 3:
 # Enter a specific country and see data about it
-        user_country = input (" Which country would you like to see specific data about? ")
-        if user_country.capitalize in country_list:
+        user_country = str(input ("Which country would you like to see specific data about? "))
+        if user_country.title () in country_list:
             # Historical Average Life Expectancy
-            #filler
-            #test
-            # Historical Average Live Expecancy compared with most recent data
+            for i in range(len(country_list)):                
+                if country_list [i] == user_country:
+                    total_expectancy += life_expectancy_list [i]
+                    if year_list [i] > largest_year:
+                        largest_year = year_list[i]
+                        recent_expectancy = life_expectancy_list [i]                        
+                    count += 1
+            #print (count)
+            #print (total_expectancy)
+            average_expectancy = total_expectancy/count
+            print (f"The historical average life expectancy for {user_country.title()} is {average_expectancy:.2f} years.")
+            # Historical Average Life Expecancy compared with most recent data
+            print (f"The most recent life expectancy for {user_country.title()} was "+
+            f"{recent_expectancy:.2f} (recorded in {largest_year}).")
+            if average_expectancy > recent_expectancy:
+                print (f"That's a decrease of {average_expectancy-recent_expectancy:.2f} years. "+
+                f"I wonder what's happening in {user_country.title()}")
+            elif average_expectancy < recent_expectancy:
+                print (f"That's an increase of {recent_expectancy-average_expectancy:.2f} years. "+
+                f"I want to know what they are doing in {user_country.title()}")
+            elif average_expectancy == recent_expectancy:
+                print (f"Which means that {user_country.title()} is sitting at its historical average life expectancy.")
+            else:
+                print ("I think there was an error in calculating something that we did not find in testing.")
             
-            # Largest change of life Expectancy betwen years
-            
-            print()     
-
+        else:
+            print ("We're Sorry, that country is not in the list.\nPerhapse you can check the spelling.")
         input ("Press Enter to continue\n")
     elif user_choice == 4:
 # Quit
