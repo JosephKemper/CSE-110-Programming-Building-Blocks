@@ -1,4 +1,15 @@
-adding_list_test = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+from datetime import datetime
 
-list_average =sum(adding_list_test)/len(adding_list_test)
-print(list_average)
+# Function to import current date and time
+def print_time (task_name):
+    print (f"{task_name} Completed")
+    print (datetime.now())
+    print()
+
+first_name = "Joseph"
+print_time ("Print First Name")
+
+for x in range (0,10):
+    print (x)
+
+print_time ("Count to Ten")
