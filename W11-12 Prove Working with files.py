@@ -13,7 +13,7 @@ largest_year = 0
 recent_expectancy = 0
 
 # Open provided life-expectancy.csv file
-with open ("life-expectancy.csv", encoding="utf-8") as country_data:
+with open ("life-expectancy.csv") as country_data:
     for line in country_data:
         # Clean any leading and trailing whitespace
         clean_line = line.strip ()
