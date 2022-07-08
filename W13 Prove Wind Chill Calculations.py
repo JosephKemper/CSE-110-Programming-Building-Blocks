@@ -1,7 +1,6 @@
 # calculate and return the wind chill based on a given temperature and wind speed.
 def calculate_wind_chill (temperature,wind_speed):
-    wind_chill_factor =35.74+0.6215*temperature-35.75(wind_speed**0.16)+0.4275*temperature*(wind_speed**0.16)
-    return wind_chill_factor
+    return 35.74+0.6215*temperature-35.75*(wind_speed**0.16)+0.4275*temperature*(wind_speed**0.16)
 
 # Write a function to convert from Celsius to Fahrenheit
 def celsius_to_farenheit (temperature):
@@ -26,6 +25,3 @@ while user_choice != 3:
             f"and a wind speed of {wind_speed}, "+
             f"the windchill would be {wind_chill_factor:.2f}F.")
             
-# Error in line 3. 
-# float object not callable. 
-# will figure out when I resume tomorrow. 
