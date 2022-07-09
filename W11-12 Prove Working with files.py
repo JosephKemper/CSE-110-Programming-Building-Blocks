@@ -1,6 +1,4 @@
-# Ran into problems trying to use file with headings on it. 
-# Had to remove the headings from the file to get the program to work properly.
-
+# Lists for data storage
 country_list = []
 code_list = []
 year_list = []
@@ -21,25 +19,24 @@ with open ("life-expectancy.csv") as country_data:
         # Split line into parts
         data_parts = clean_line.split(",")
 
-
-        country = str(data_parts [0])
-        code = str(data_parts [1])
-        year = int(data_parts [2])
-        life_expectancy = float(data_parts [3])
+        
+        country = data_parts [0]
+        code = data_parts [1]
+        year = data_parts [2]
+        life_expectancy = data_parts [3]
 
 # When trying to find the shortest life expetancy, I first ran into a problem where I only got a period. 
 # When trying to troubleshoot the problem, 
 # I ultimately realized that I had not put things into a list. I only broke it into parts.
-        country_list.append (country)
-        code_list.append (code)
-        year_list.append (year)
-        life_expectancy_list.append (life_expectancy)
-
-# # Removing headings to allow for averages and other functions to work better. 
-# country_list.pop(0)        
-# code_list.pop(0)
-# year_list.pop(0)
-# life_expectancy_list.pop(0)
+        if life_expectancy != "Life expectancy (years)":
+            country_str = str(country)
+            code_str = str(code)
+            year_int = int(year)
+            life_float = float(life_expectancy)
+            country_list.append (country_str)
+            code_list.append (code_str)
+            year_list.append (year_int)
+            life_expectancy_list.append (life_float)
 
 
 
@@ -63,12 +60,14 @@ while user_choice != 4:
 3. Enter a specific country and see data about it
 4. Quit
     """)
-    user_choice = int(input("Please enter the number of the option you wish to select: "))
-    if user_choice == 1:
+    user_choice = input("Please enter the number of the option you wish to select: ")
+    if int(user_choice) == 1:
         # Find the max and minimum life expectancy
         # Finding the shortest life expetancy on record
         shortest_life_expectancy = min(life_expectancy_list)
-# Code to find the index of the shorest average life expectancy and assign it to a shorter variable name for readability
+# Code to find the index of the shorest average life expectancy 
+# and assign it to a shorter variable name for readability
+# and allow the whole thing to be printed
         lowest_index = life_expectancy_list.index (shortest_life_expectancy)
         lowest_year = year_list[lowest_index]
         lowest_code = code_list[lowest_index]
@@ -85,13 +84,12 @@ while user_choice != 4:
 
 # printing desired user data
         print (f"In the year {lowest_year}, {lowest_country} (Code {lowest_code})"+ 
-        f" had the lowest average life expectancy on record at {lowest_expectancy} years.")
+        f" had the lowest average life expectancy on record at {lowest_expectancy} years.")        
         print (f"In the year {highest_year}, {highest_country} (Code {highest_code})" + 
-        f" had the longest average life expectancy on record at {highest_expectancy} years.")
-        
-        input ("Press Enter to continue\n")
+        f" had the longest average life expectancy on record at {highest_expectancy} years.")        
+        input (print("\nPress Enter to Continue\n"))
 
-    elif user_choice == 2:
+    elif int(user_choice) == 2:
 # Enter a specific year and see general data about it
 # Calculating Year range for display to user
         oldest_year = min(year_list)
@@ -107,14 +105,15 @@ while user_choice != 4:
                 if year_list [i] == user_year:
                     print (f"In {user_year}, {country_list[i]} (Code {code_list[i]})" +
                     f" has an average life expectancy of {life_expectancy_list[i]}.")
+            
         else:
             # Include option for possible gaps in data. 
             print ("We're sorry we don't have data on that year. \nPlease try another year.\n")
 
 # Give user time to breate before displaying the menu for them. 
-        input ("Press Enter to continue\n")
+        input (print("\nPress Enter to Continue\n"))
 
-    elif user_choice == 3:
+    elif int(user_choice) == 3:
 # Enter a specific country and see data about it
         user_country = str(input ("Which country would you like to see specific data about? "))
         if user_country.title () in country_list:
@@ -126,8 +125,11 @@ while user_choice != 4:
                         largest_year = year_list[i]
                         recent_expectancy = life_expectancy_list [i]                        
                     count += 1
+
+# The next two lines were used for troubleshooting
             #print (count)
             #print (total_expectancy)
+
             average_expectancy = total_expectancy/count
             print (f"The historical average life expectancy for {user_country.title()} is {average_expectancy:.2f} years.")
             # Historical Average Life Expecancy compared with most recent data
@@ -137,7 +139,7 @@ while user_choice != 4:
                 print (f"That's a decrease of {average_expectancy-recent_expectancy:.2f} years. "+
                 f"I wonder what's happening in {user_country.title()}")
             elif average_expectancy < recent_expectancy:
-                print (f"That's an increase of {recent_expectancy-average_expectancy:.2f} years. "+
+                print (f"That's an increase of {recent_expectancy-average_expectancy:.2f} years! "+
                 f"I want to know what they are doing in {user_country.title()}")
             elif average_expectancy == recent_expectancy:
                 print (f"Which means that {user_country.title()} is sitting at its historical average life expectancy.")
@@ -146,15 +148,15 @@ while user_choice != 4:
             
         else:
             print ("We're Sorry, that country is not in the list.\nPerhapse you can check the spelling.")
-        input ("Press Enter to continue\n")
-    elif user_choice == 4:
+        input (print("\nPress Enter to Continue\n"))
+    elif int(user_choice) == 4:
 # Quit
         break
 
     else:
 # Number not in range
         print ("\nWe're sorry that was not a valid option. \nValid options are the numbers from 1 to 4.\n")
-        input ("Press Enter to continue\n")
+        input (print("\nPress Enter to Continue\n"))
 
 
 
