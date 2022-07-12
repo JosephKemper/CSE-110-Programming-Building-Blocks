@@ -17,7 +17,7 @@ def fahrenheit_to_celsius (temperature):
 # something about putting a reading pause into the program causes it to display "None"
 # after the function has completed. 
 # The only thing I found online (from someone who had a similar issue)
-# was that it is because the funcion is not returning anything. 
+# was that it is because the function is not returning anything. 
 # However, it was doing this (but only when I had the reading pause enabled)
 # even before I put it into a function. 
 # And when I disabled the code, it would stop. 
