@@ -1,12 +1,10 @@
 import math
-from turtle import width
 
 
 def computer_area_rectangle (length,width):
    return length*width
 
 def compute_area_square (side):
-
     return side*side
 
 def compute_area_circle (radius):
